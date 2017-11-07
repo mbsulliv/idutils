@@ -45,6 +45,14 @@
 #include "scanners.h"
 #include "iduglobal.h"
 
+#ifndef FALLTHROUGH
+# if __GNUC__ < 7
+#  define FALLTHROUGH ((void) 0)
+# else
+#  define FALLTHROUGH __attribute__ ((__fallthrough__))
+# endif
+#endif
+
 struct summary
 {
   struct token **sum_tokens;
@@ -275,8 +283,10 @@ main (int argc, char **argv)
 
 	case 'V':
 	  walker_verbose_flag = 1;
+	  FALLTHROUGH;
 	case 'v':
 	  verbose_flag = 1;
+	  FALLTHROUGH;
 	case 's':
 	  statistics_flag = 1;
 	  break;
