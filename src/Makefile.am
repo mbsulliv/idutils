@@ -1,7 +1,7 @@
 bin_PROGRAMS = mkid lid fid fnid xtokid aid eid gid
 dist_bin_SCRIPTS = defid
 
-noinst_HEADERS = lid.h
+noinst_HEADERS = die.h lid.h
 aid_SOURCES = lid.c lid-aid.c
 eid_SOURCES = lid.c lid-eid.c
 gid_SOURCES = lid.c lid-gid.c
