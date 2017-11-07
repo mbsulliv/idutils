@@ -187,7 +187,7 @@ io_read (FILE *input_FILE, void *addr, unsigned int size, int io_type)
 	  *(unsigned char *)addr = getc (input_FILE);
 	  break;
 	default:
-	  error (EXIT_FAILURE, 0, _("unsupported size in io_read (): %d"), size);
+	  error (EXIT_FAILURE, 0, _("unsupported size in io_read (): %u"), size);
 	}
     }
   else if (io_type == IO_TYPE_STR)

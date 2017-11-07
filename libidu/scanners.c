@@ -752,7 +752,7 @@ next:
 	  if (isprint (c))
 	    fprintf (stderr, _("junk: `%c'"), c);
 	  else
-	    fprintf (stderr, _("junk: `\\%03o'"), c);
+	    fprintf (stderr, _("junk: `\\%03o'"), (unsigned) c);
 	}
       ungetc (c, in_FILE);
       *flags |= TOK_LITERAL;
@@ -1021,7 +1021,7 @@ next:
       if (isprint (c))
 	fprintf (stderr, _("junk: `%c'"), c);
       else
-	fprintf (stderr, _("junk: `\\%03o'"), c);
+	fprintf (stderr, _("junk: `\\%03o'"), (unsigned) c);
       goto next;
     }
 
@@ -1224,7 +1224,7 @@ top:
       if (isprint (c))
 	fprintf (stderr, _("junk: `%c'"), c);
       else
-	fprintf (stderr, _("junk: `\\%03o'"), c);
+	fprintf (stderr, _("junk: `\\%03o'"), (unsigned) c);
       goto top;
     }
 
@@ -1494,7 +1494,7 @@ top:
       if (isprint (c))
         fprintf (stderr, _("junk: `%c'"), c);
       else
-        fprintf (stderr, _("junk: `\\%03o'"), c);
+        fprintf (stderr, _("junk: `\\%03o'"), (unsigned) c);
       goto top;
     }
 

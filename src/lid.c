@@ -456,7 +456,7 @@ main (int argc, char **argv)
   if (ambiguous_prefix_length)
     {
       if (!query_ambiguous_prefix (ambiguous_prefix_length, report_function))
-	fprintf (stderr, _("All identifiers are non-ambiguous within the first %d characters\n"),
+	fprintf (stderr, _("All identifiers are non-ambiguous within the first %u characters\n"),
 		 ambiguous_prefix_length);
     }
   else

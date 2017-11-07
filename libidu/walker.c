@@ -467,7 +467,7 @@ print_member_file (struct member_file *member)
 {
   char *file_name = alloca (PATH_MAX);
   absolute_file_name (file_name, member->mf_link);
-  printf ("%ld: %s: %s\n", idh.idh_member_file_table.ht_fill - 1,
+  printf ("%lu: %s: %s\n", idh.idh_member_file_table.ht_fill - 1,
 	  member->mf_lang_args->la_language->lg_name, file_name);
 }
 
@@ -477,7 +477,7 @@ print_member_file (struct member_file *member)
 static char **langs_included;
 static char **langs_excluded;
 
-static int
+static int _GL_ATTRIBUTE_PURE
 lang_wanted (char const *lang_name)
 {
   if (langs_excluded)

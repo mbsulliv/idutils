@@ -517,7 +517,7 @@ scan_files (struct idhead const *idhp)
   if (verbose_flag) {
     char offstr[INT_BUFSIZE_BOUND(off_t)];
 
-    printf ("files=%ld, largest=%s, slots=%lu\n",
+    printf ("files=%lu, largest=%s, slots=%lu\n",
 	    idhp->idh_member_file_table.ht_fill,
 	    offtostr(largest_member_file, offstr),
 	    token_table.ht_size);
@@ -645,25 +645,25 @@ scan_member_file_1 (get_token_func_t get_token, void const *args, FILE *source_F
 static void
 report_statistics (void)
 {
-  printf (_("Name=%ld, "), name_tokens);
-  printf (_("Number=%ld, "), number_tokens);
-  printf (_("String=%ld, "), string_tokens);
-  printf (_("Literal=%ld, "), literal_tokens);
-  printf (_("Comment=%ld\n"), comment_tokens);
+  printf (_("Name=%lu, "), name_tokens);
+  printf (_("Number=%lu, "), number_tokens);
+  printf (_("String=%lu, "), string_tokens);
+  printf (_("Literal=%lu, "), literal_tokens);
+  printf (_("Comment=%lu\n"), comment_tokens);
 
-  printf (_("Files=%ld, "), idh.idh_files);
-  printf (_("Tokens=%ld, "), occurrences);
-  printf (_("Bytes=%ld Kb, "), input_chars / 1024);
+  printf (_("Files=%lu, "), idh.idh_files);
+  printf (_("Tokens=%lu, "), occurrences);
+  printf (_("Bytes=%lu Kb, "), input_chars / 1024);
   printf (_("Heap=%llu+%llu Kb, "),
 	  (unsigned long long) ((char *) heap_after_scan
 				- (char *) heap_after_walk) / 1024,
 	  (unsigned long long) ((char *) heap_after_walk
 				- (char *) heap_initial) / 1024);
-  printf (_("Output=%ld (%ld tok, %ld hit)\n"),
+  printf (_("Output=%lu (%lu tok, %lu hit)\n"),
 	  output_length, tokens_length, hits_length);
 
   hash_print_stats (&token_table, stdout);
-  printf (_(", Freq=%ld/%ld=%.2f\n"), occurrences, token_table.ht_fill,
+  printf (_(", Freq=%lu/%lu=%.2f\n"), occurrences, token_table.ht_fill,
 	  (double) occurrences / (double) token_table.ht_fill);
 }
 
@@ -863,7 +863,7 @@ summarize (void)
       unsigned long init_size = INIT_TOKENS_SIZE (summary->sum_level);
 
       if (verbose_flag)
-	printf (_("level %d: %ld/%ld = %.0f%%\n"),
+	printf (_("level %d: %lu/%lu = %.0f%%\n"),
 		summary->sum_level, count, init_size,
 		100.0 * (double) count / (double) init_size);
 

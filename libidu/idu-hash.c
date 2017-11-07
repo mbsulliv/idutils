@@ -48,7 +48,7 @@ hash_init (struct hash_table* ht, unsigned long size,
   ht->ht_empty_slots = ht->ht_size;
   ht->ht_vec = xcalloc (ht->ht_size, sizeof(struct token *));
   if (ht->ht_vec == 0)
-    error (EXIT_FAILURE, 0, _("can't allocate %ld bytes for hash table: memory exhausted"),
+    error (EXIT_FAILURE, 0, _("can't allocate %lu bytes for hash table: memory exhausted"),
 	   ht->ht_size * sizeof(struct token *));
   ht->ht_capacity = ht->ht_size * 15 / 16; /* 93.75% loading factor */
   ht->ht_fill = 0;
@@ -261,10 +261,10 @@ hash_rehash (struct hash_table* ht)
 void
 hash_print_stats (struct hash_table const *ht, FILE *out_FILE)
 {
-  fprintf (out_FILE, _("Load=%ld/%ld=%.0f%%, "), ht->ht_fill, ht->ht_size,
+  fprintf (out_FILE, _("Load=%lu/%lu=%.0f%%, "), ht->ht_fill, ht->ht_size,
 	   100.0 * (double) ht->ht_fill / (double) ht->ht_size);
-  fprintf (out_FILE, _("Rehash=%d, "), ht->ht_rehashes);
-  fprintf (out_FILE, _("Collisions=%ld/%ld=%.0f%%"), ht->ht_collisions, ht->ht_lookups,
+  fprintf (out_FILE, _("Rehash=%u, "), ht->ht_rehashes);
+  fprintf (out_FILE, _("Collisions=%lu/%lu=%.0f%%"), ht->ht_collisions, ht->ht_lookups,
 	   (ht->ht_lookups
 	    ? (100.0 * (double) ht->ht_collisions / (double) ht->ht_lookups)
 	    : 0));
