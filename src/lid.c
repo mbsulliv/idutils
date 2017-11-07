@@ -38,6 +38,7 @@
 #include <error.h>
 
 #include "closeout.h"
+#include "die.h"
 #include "xnls.h"
 #include "idfile.h"
 #include "iduglobal.h"
@@ -784,7 +785,7 @@ editit:
 
 	argv[i] = 0;
 	execvp (editor_argv[0], argv);
-	error (0, errno, _("can't exec `%s'"), editor_argv[0]);
+	die (EXIT_FAILURE, errno, _("can't exec `%s'"), editor_argv[0]);
       }
 
     default:
