@@ -1107,23 +1107,36 @@ links_depth (struct file_link const *flink)
 /****************************************************************************/
 /* Hash stuff for `struct dev_ino'.  */
 
-static unsigned long
-dev_ino_hash_1 (void const *key)
-{
-  unsigned long result = 0;
-  INTEGER_HASH_1 (((struct dev_ino const *) key)->di_dev, result);
-  INTEGER_HASH_1 (((struct dev_ino const *) key)->di_ino, result);
-  return result;
+/* FIXME: consider dumping all of this in favor of gnulib's di-set module.  */
+/* Expand to the definition of a function that hashes a dev+inode pair,
+   with application of XFORM.  */
+#define DEV_INO_HASH_DEFUN(FN_NAME, XFORM)				\
+static size_t _GL_ATTRIBUTE_PURE					\
+FN_NAME (void const *x)							\
+{									\
+  struct dev_ino const *p = x;						\
+  ino_t ino = p->di_ino;						\
+									\
+  /* When INO is wider than size_t, XOR the words of INO into H.	\
+     This avoids loss of info, without applying % to the wider type,	\
+     which could be quite slow on some systems.  */			\
+  size_t h = XFORM (ino);						\
+  unsigned int n_words = sizeof ino / sizeof h + (sizeof ino % sizeof h != 0); \
+  for (unsigned int i = 1; i < n_words; i++)				\
+    h ^= XFORM (ino >> CHAR_BIT * sizeof h * i);			\
+									\
+  dev_t dev = p->di_dev;						\
+  h ^= XFORM (dev);							\
+  n_words = sizeof dev / sizeof h + (sizeof dev % sizeof h != 0);	\
+  for (unsigned int i = 1; i < n_words; i++)				\
+    h ^= XFORM (dev >> CHAR_BIT * sizeof h * i);			\
+									\
+  return h;								\
 }
-
-static unsigned long
-dev_ino_hash_2 (void const *key)
-{
-  unsigned long result = 0;
-  INTEGER_HASH_2 (((struct dev_ino const *) key)->di_dev, result);
-  INTEGER_HASH_2 (((struct dev_ino const *) key)->di_ino, result);
-  return result;
-}
+static inline size_t xform_NOP (size_t k) { return k; }
+static inline size_t xform_NOT (size_t k) { return ~k; }
+DEV_INO_HASH_DEFUN(dev_ino_hash_1, xform_NOP)
+DEV_INO_HASH_DEFUN(dev_ino_hash_2, xform_NOT)
 
 static int
 dev_ino_hash_compare (void const *x, void const *y)

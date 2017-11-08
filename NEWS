@@ -6,6 +6,10 @@ GNU idutils NEWS                                      -*- outline -*-
 
   lid is no longer susceptible to a buffer overrun
 
+  mkid no longer mistakenly warns that different files are the same but
+  with "different scans" for files with colliding 64-bit inode numbers
+  [the bug dates back to the initial implementation]
+
 
 * Noteworthy changes in release 4.6 (2012-02-03) [stable]
 
