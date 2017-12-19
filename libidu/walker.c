@@ -1139,16 +1139,11 @@ DEV_INO_HASH_DEFUN(dev_ino_hash_1, xform_NOP)
 DEV_INO_HASH_DEFUN(dev_ino_hash_2, xform_NOT)
 
 static int
-dev_ino_hash_compare (void const *x, void const *y)
+dev_ino_hash_compare (void const *xv, void const *yv)
 {
-  int result;
-  INTEGER_COMPARE (((struct dev_ino const *) x)->di_ino,
-		   ((struct dev_ino const *) y)->di_ino, result);
-  if (result)
-    return result;
-  INTEGER_COMPARE (((struct dev_ino const *) x)->di_dev,
-		   ((struct dev_ino const *) y)->di_dev, result);
-  return result;
+  struct dev_ino const *x = xv;
+  struct dev_ino const *y = yv;
+  return x->di_ino == y->di_ino && x->di_dev == y->di_dev;
 }
 
 #endif
