@@ -41,6 +41,8 @@ if test "$gl_gcc_warnings" = yes; then
   AC_SUBST([WERROR_CFLAGS])
 
   # Add many warnings, except some...
+  nw=
+  nw="$nw -Wduplicated-branches"    # Too many false alarms
   nw="$nw -Wdeclaration-after-statement" # too useful to forbid
   nw="$nw -Waggregate-return"       # anachronistic
   nw="$nw -Wlong-long"              # C90 is anachronistic (lib/gethrxtime.h)
