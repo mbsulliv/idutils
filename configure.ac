@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.61)
+AC_PREREQ([2.63])
 AC_INIT([idutils], m4_esyscmd([build-aux/git-version-gen .tarball-version]),
 	[bug-idutils@gnu.org])
 
