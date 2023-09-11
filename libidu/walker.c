@@ -1141,9 +1141,16 @@ DEV_INO_HASH_DEFUN(dev_ino_hash_2, xform_NOT)
 static int
 dev_ino_hash_compare (void const *xv, void const *yv)
 {
+  int result;
   struct dev_ino const *x = xv;
   struct dev_ino const *y = yv;
-  return x->di_ino == y->di_ino && x->di_dev == y->di_dev;
+
+  result = (x->di_ino > y->di_ino) - (x->di_ino < y->di_ino);
+  if (result)
+    return result;
+
+  result = (x->di_dev > y->di_dev) - (x->di_dev < y->di_dev);
+  return result;
 }
 
 #endif
